@@ -1,0 +1,86 @@
+[gd_scene load_steps=11 format=3 uid="uid://vhai1jk63hw8"]
+
+[ext_resource type="Texture2D" uid="uid://bny25v2w2kn58" path="res://img/eye/eye_0007.png" id="1_5y70p"]
+[ext_resource type="Script" path="res://tscn/eye.gd" id="1_hiwk5"]
+[ext_resource type="Texture2D" uid="uid://d0i61snkygvps" path="res://img/eye/eye_0000.png" id="2_2gwl5"]
+[ext_resource type="Texture2D" uid="uid://con8suciuskqy" path="res://img/eye/eye_0001.png" id="3_vwdsp"]
+[ext_resource type="Texture2D" uid="uid://2gwnkrbmco6u" path="res://img/eye/eye_0002.png" id="4_24otk"]
+[ext_resource type="Texture2D" uid="uid://cfu213wyxh3kn" path="res://img/eye/eye_0003.png" id="5_ltnam"]
+[ext_resource type="Texture2D" uid="uid://ot4526hx6ufs" path="res://img/eye/eye_0004.png" id="6_8chd5"]
+[ext_resource type="Texture2D" uid="uid://c7hldy7pj6cnh" path="res://img/eye/eye_0005.png" id="7_yojhk"]
+[ext_resource type="Texture2D" uid="uid://dtamag56shixo" path="res://img/eye/eye_0006.png" id="8_csd1h"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n8w4b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2gwl5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_vwdsp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_24otk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ltnam")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_8chd5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_yojhk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_csd1h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_5y70p")
+}],
+"loop": false,
+"name": &"0to7",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_5y70p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_csd1h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_yojhk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_8chd5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ltnam")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_24otk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_vwdsp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_2gwl5")
+}],
+"loop": false,
+"name": &"7to0",
+"speed": 5.0
+}]
+
+[node name="Eye" type="Node2D"]
+script = ExtResource("1_hiwk5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_n8w4b")
+animation = &"7to0"
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

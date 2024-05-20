@@ -1,0 +1,138 @@
+[gd_scene load_steps=21 format=3 uid="uid://vrkrespsg0ei"]
+
+[ext_resource type="PackedScene" uid="uid://c4vtofgvyf608" path="res://tscn/player.tscn" id="1_e8kd8"]
+[ext_resource type="Script" path="res://tscn/main.gd" id="1_kxsph"]
+[ext_resource type="Script" path="res://tscn/background.gd" id="2_u23td"]
+[ext_resource type="Texture2D" uid="uid://colcea6tyeo0k" path="res://img/texture/road3.png" id="3_bhtk0"]
+[ext_resource type="Script" path="res://tscn/shake_tween.gd" id="4_4p0k5"]
+[ext_resource type="Script" path="res://tscn/eye_summoner.gd" id="4_ji6hc"]
+[ext_resource type="Shader" path="res://shader/nega.gdshader" id="5_4pcnw"]
+[ext_resource type="Script" path="res://tscn/negaposi.gd" id="6_laohl"]
+[ext_resource type="Script" path="res://tscn/ui.gd" id="7_n41wt"]
+[ext_resource type="PackedScene" uid="uid://6x48v24jglgx" path="res://tscn/menu.tscn" id="8_w63tv"]
+[ext_resource type="PackedScene" uid="uid://bege0iufpxjsj" path="res://tscn/setting.tscn" id="9_auneq"]
+[ext_resource type="PackedScene" uid="uid://clguklv2qmfw5" path="res://tscn/gameover.tscn" id="10_uh12a"]
+[ext_resource type="Script" path="res://tscn/gameover.gd" id="11_bsnxc"]
+[ext_resource type="PackedScene" uid="uid://ds8b4q82kwa5u" path="res://tscn/title.tscn" id="12_kwige"]
+[ext_resource type="Script" path="res://tscn/title.gd" id="13_3aw7k"]
+[ext_resource type="PackedScene" uid="uid://dpon5eo4otymt" path="res://tscn/dialogue.tscn" id="16_bfp8h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x0sm3"]
+size = Vector2(139, 102)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s4rsr"]
+size = Vector2(139, 86)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yvpn4"]
+size = Vector2(154, 4)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fjr4g"]
+shader = ExtResource("5_4pcnw")
+shader_parameter/center_pos = null
+shader_parameter/inside_radius = null
+shader_parameter/outside_radius = null
+shader_parameter/display_ratio = null
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_kxsph")
+
+[node name="Background" type="Node" parent="."]
+script = ExtResource("2_u23td")
+
+[node name="Road1" type="Sprite2D" parent="Background"]
+z_index = -1
+position = Vector2(70, 16)
+texture = ExtResource("3_bhtk0")
+
+[node name="Road2" type="Sprite2D" parent="Background"]
+z_index = -1
+position = Vector2(70, 400)
+texture = ExtResource("3_bhtk0")
+
+[node name="EyeSummoner" type="Node" parent="."]
+script = ExtResource("4_ji6hc")
+
+[node name="InitialSpawnRegion" type="CollisionShape2D" parent="EyeSummoner"]
+position = Vector2(-29.5, -5)
+shape = SubResource("RectangleShape2D_x0sm3")
+
+[node name="SpawnRegion" type="CollisionShape2D" parent="EyeSummoner"]
+position = Vector2(-29.5, 115)
+shape = SubResource("RectangleShape2D_s4rsr")
+
+[node name="DeleteRegion" type="CollisionShape2D" parent="EyeSummoner"]
+position = Vector2(-30, -77)
+shape = SubResource("RectangleShape2D_yvpn4")
+
+[node name="Player" parent="." instance=ExtResource("1_e8kd8")]
+position = Vector2(71, -33)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(-71, 33)
+zoom = Vector2(5, 5)
+limit_left = -1000000000
+limit_top = -1000000000
+limit_right = 1000000000
+limit_bottom = 1000000000
+position_smoothing_enabled = true
+
+[node name="ShakeTween" type="Node" parent="Player/Camera2D"]
+script = ExtResource("4_4p0k5")
+
+[node name="NegaposiLayer" type="CanvasLayer" parent="."]
+visible = false
+follow_viewport_scale = 0.001
+
+[node name="Negaposi" type="ColorRect" parent="NegaposiLayer"]
+material = SubResource("ShaderMaterial_fjr4g")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3.26, 2.64072)
+color = Color(0.576471, 0.207843, 0.541176, 1)
+script = ExtResource("6_laohl")
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 3
+follow_viewport_scale = 0.0
+script = ExtResource("7_n41wt")
+
+[node name="LabelDistance" type="Label" parent="UI"]
+offset_left = 38.0
+offset_top = 547.0
+offset_right = 239.0
+offset_bottom = 623.0
+theme_override_font_sizes/font_size = 70
+text = "0"
+horizontal_alignment = 2
+uppercase = true
+
+[node name="HeartContainer" type="VBoxContainer" parent="UI"]
+offset_left = 1105.0
+offset_top = 22.0
+offset_right = 1278.0
+offset_bottom = 418.0
+scale = Vector2(0.2, 0.2)
+theme_override_constants/separation = 50
+
+[node name="Menu" parent="." instance=ExtResource("8_w63tv")]
+visible = false
+
+[node name="Setting" parent="." instance=ExtResource("9_auneq")]
+visible = false
+
+[node name="Gameover" parent="." instance=ExtResource("10_uh12a")]
+visible = false
+script = ExtResource("11_bsnxc")
+
+[node name="Title" parent="." instance=ExtResource("12_kwige")]
+visible = false
+script = ExtResource("13_3aw7k")
+
+[node name="Dialogue" parent="." instance=ExtResource("16_bfp8h")]
+visible = false
+
+[connection signal="visibility_changed" from="Gameover" to="Gameover" method="_on_visibility_changed"]
+[connection signal="visibility_changed" from="Title" to="Title" method="_on_visibility_changed"]

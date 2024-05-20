@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://dpon5eo4otymt"]
+
+[ext_resource type="Script" path="res://tscn/dialogue.gd" id="1_ms1su"]
+[ext_resource type="Texture2D" uid="uid://cn24ixlak8gtk" path="res://img/background/1.png" id="2_7wkxb"]
+[ext_resource type="PackedScene" uid="uid://73jm5qjy52vq" path="res://tscn/balloon.tscn" id="3_eda0g"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4uwqt"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="Dialogue" type="CanvasLayer"]
+script = ExtResource("1_ms1su")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4uwqt")
+
+[node name="Image" type="TextureRect" parent="."]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 121.0
+offset_top = 2.0
+offset_right = -96.0
+offset_bottom = -119.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_7wkxb")
+stretch_mode = 4
+
+[node name="ExampleBalloon" parent="." instance=ExtResource("3_eda0g")]

@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvn4lt3bblt32"]
+
+[ext_resource type="Script" path="res://tscn/dialogic_background.gd" id="1_5bn2b"]
+
+[node name="DialogicBackground" type="CanvasLayer"]
+script = ExtResource("1_5bn2b")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Image" type="TextureRect" parent="."]
+texture_filter = 1
+offset_right = 40.0
+offset_bottom = 40.0

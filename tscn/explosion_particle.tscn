@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://k82lb6oexytt"]
+
+[ext_resource type="Script" path="res://tscn/explosion_particle.gd" id="1_a6mts"]
+
+[node name="ExplosionParticle" type="Node2D"]
+script = ExtResource("1_a6mts")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 17
+lifetime = 0.7
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 48.39
+initial_velocity_max = 134.41
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

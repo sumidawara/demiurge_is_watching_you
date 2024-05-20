@@ -1,0 +1,5 @@
+[background scene="res://tscn/dialogic_background.tscn" arg="res://img/background/1.png" fade="0.0"]
+1
+[background scene="res://tscn/dialogic_background.tscn" arg="res://img/background/2.png" fade="0.0"]
+2
+[signal arg="on_prologue_finished"]
